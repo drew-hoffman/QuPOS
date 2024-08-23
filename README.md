@@ -6,7 +6,7 @@
 * Only the `WordFinder` class is unit tested.
 * I've written this using .net MAUI, because it seemed more relevant. I wouldn't run .net maui code in the cloud unless I had a good reason to though.
 * The UI is an afterthought. It provides a UI for using the WordFinder class, but nothing more.
-* Per the documentation, but still worth calling out, I don't search for words right to left, down to up, or on a diaganal.
+* Per the documentation, but still worth calling out, I don't search for words right to left, down to up, or on a diagonal.
 * Input is more or less assumed to be happy-path.
 * Output is ordered by frequency descending.
  
@@ -16,6 +16,5 @@
 * Depending on the hardware and load, I'd consider adding metrics around the Find() runtime, and if necessary, the `private` helper functions as well.
 * Edge cases aren't handled very well:
 	* * "Hello" is different from "HELLO" in the wordstream list.
-	* * Putting "Hello", "HELLO", and "hello" into the matrix will return 3 hits.
-	* * Really, we need to discuss capitalization. Can I just `.toUpperCase()` everything or do we need to support [i11n](https://www.moserware.com/2008/02/does-your-code-pass-turkey-test.html) too?
-	* * I haven't tried making words out of 😃 yet, but I'm sure someone will.
+	* * Really, we need to discuss capitalization. Can I just `.toUpper()` everything or do we need to support [i11n](https://www.moserware.com/2008/02/does-your-code-pass-turkey-test.html) too?
+	* * I haven't tried making words out of emojis (😃) yet.
