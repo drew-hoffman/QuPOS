@@ -1,9 +1,9 @@
-﻿namespace QuPOS
+﻿using System;
+
+namespace QuPOS
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
@@ -11,15 +11,21 @@
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
-            count++;
+            var matrix = new List<string>() { "xxDFOXx", "Brownxx", "xxGFOXx", "FOXOVER", "xVLAZYx", "xEJUMPx", "xRSwift" };
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+            var entries = wordListEntry.Text.Split(',').ToList();
+            entries = entries.Select(x => x.Trim()).ToList();
+
+            WordFinder finder = new WordFinder(matrix);
+            var results = finder.Find(entries);
+
+            if (results.Count() == 0) {
+                CounterBtn.Text = "No results.";
+            }
             else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            {
+                CounterBtn.Text = results.Count() + " items found: " + string.Join(", ", results);
+            }
         }
     }
-
 }

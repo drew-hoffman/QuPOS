@@ -2,7 +2,7 @@ using QuPOS;
 
 namespace TestProject1
 {
-    public class Tests
+    public class WordFinderTests
     {
         [SetUp]
         public void Setup()
@@ -13,13 +13,13 @@ namespace TestProject1
         public void TestHorizontalTextSearch()
         {
             List<string> matrix = ["xHELLO", "WORLDx", "xxxxxx", "HELLOx", "xxxxxx", "xWORLx"];
-            List<string> myList = ["Hello", "World", "Fail"];
+            List<string> myList = ["Hello", "world", "Fail"];
             WordFinder finder = new(matrix);
             var results = finder.Find(myList);
             Assert.NotNull(results);
             Assert.That(results.Count(), Is.EqualTo(2));
             Assert.True(results.Contains("Hello"));
-            Assert.True(results.Contains("World"));
+            Assert.True(results.Contains("world"));
             Assert.False(results.Contains("Fail"));
         }
 

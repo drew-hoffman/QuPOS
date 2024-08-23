@@ -3,7 +3,15 @@
     public class WordFinder
     {
         private readonly IEnumerable<string> matrix;
-        public WordFinder(IEnumerable<string> matrix) => this.matrix = matrix;
+        public WordFinder(IEnumerable<string> matrix)
+        {
+            var size = matrix.First().Count();
+            if (matrix.Where(x => x.Length != size).Count() > 0) {
+                throw new NotSupportedException("Only uniform grids are supported.");
+            }
+
+            this.matrix = matrix;
+        }
 
         public IEnumerable<string> Find(IEnumerable<string> wordstream)
         {
@@ -15,7 +23,7 @@
             var _matrix2 = RotateMatrix90DegreesCounterclockwise(_matrix);
             result = SearchMatrixForWords(wordstream, _matrix2, result);
 
-            var sortedAndFilteredPairs = result.Values.OrderBy(x => x.Value).Take(10);
+            var sortedAndFilteredPairs = result.Values.OrderByDescending(x => x.Value).Take(10);
             var keys = sortedAndFilteredPairs.Select( x => x.Key).ToList();
             return keys;
         }
@@ -24,6 +32,8 @@
         {
             foreach (string word in words)
             {
+                if (string.IsNullOrWhiteSpace(word)) continue;
+
                 foreach (char[] line in matrix)
                 {
                     var charAsString = new string(line);
@@ -31,9 +41,10 @@
                     
                     if (charAsString.Contains(word, StringComparison.OrdinalIgnoreCase))
                     {
-                        if (result.TryGetValue(word, out KeyValuePair<string, int> value))
+                        if (result.ContainsKey(word))
                         {
-                            result[word] = new KeyValuePair<string, int>(word, value.Value + 1);
+                            var pair = result[word];
+                            result[word] = new KeyValuePair<string, int>(word, pair.Value + 1);
                         }
                         else
                         {

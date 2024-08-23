@@ -5,7 +5,11 @@
 * The ability to read the code is more important than the ability to optimize memory and CPU cycles away. I could probably make an awesome for-loop that doesn't create any `string`s or transform objects, but it would be a bear to read or make any changes to.
 * Only the `WordFinder` class is unit tested.
 * I've written this using .net MAUI, because it seemed more relevant. I wouldn't run .net maui code in the cloud unless I had a good reason to though.
-
+* The UI is an afterthought. It provides a UI for using the WordFinder class, but nothing more.
+* Per the documentation, but still worth calling out, I don't search for words right to left, down to up, or on a diaganal.
+* Input is more or less assumed to be happy-path.
+* Output is ordered by frequency descending.
+ 
 #### If this were going into production
 * I would add logging
 * Errors are not handled. I assume you are passing a list of 0 or more items that won't crash the server.

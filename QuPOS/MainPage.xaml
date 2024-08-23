@@ -14,15 +14,24 @@
                 SemanticProperties.Description="dot net bot in a race car number eight" />
 
             <Label
-                Text="Hello, World!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                Text="The following words are present in the search grid: 'Swift', 'Brown', 'Fox', 'Jump', 'Over', 'Lazy', 'Dog'."
+                />
 
             <Label
-                Text="Welcome to &#10;.NET Multi-platform App UI"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                FontFamily="Consolas"
+                Text="The sample grid is as follows:&#10;
+                xxDFOXx&#10;
+                BROWNxx&#10;
+                xxGFOXx&#10;
+                FOXOVER&#10;
+                xVLAZYx&#10;
+                xEJUMPx&#10;
+                xRSWIFT" />
+
+            <Entry
+                x:Name="wordListEntry"
+                Text=""
+                Placeholder="Please Enter some words, separated by a comma. e.g.: 'Swift, Blue, Fox'" />
 
             <Button
                 x:Name="CounterBtn"
